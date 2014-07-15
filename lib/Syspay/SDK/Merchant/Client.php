@@ -2,7 +2,8 @@
 
 /**
  * Base API client
- * @see  https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#emerchant-rest-api
+ *
+ * @see https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#emerchant-rest-api
  */
 class Syspay_Merchant_Client
 {
@@ -39,10 +40,11 @@ class Syspay_Merchant_Client
     /**
      * Generates the x-wsse header
      *
-     * @param  string   $username The Syspay API username
-     * @param  string   $secret   The Syspay API shared secret
-     * @param  string   $nonce    A random string (optional, will be generated)
-     * @param  DateTime $created  The creation date of this header (optional, defaults to now)
+     * @param string   $username The Syspay API username
+     * @param string   $secret   The Syspay API shared secret
+     * @param string   $nonce    A random string (optional, will be generated)
+     * @param DateTime $created  The creation date of this header (optional, defaults to now)
+     *
      * @return string   The value to give to the x-wsse header
      */
     protected function generateAuthHeader($username, $secret, $nonce = null, DateTime $created = null)
@@ -71,7 +73,8 @@ class Syspay_Merchant_Client
 
     /**
      * Make a request to the Syspay API
-     * @param  Syspay_Merchant_Request $request The request to send to the API
+     * @param Syspay_Merchant_Request $request The request to send to the API
+     *
      * @return mixed The response to the request
      * @throws Syspay_Merchant_RequestException If the request could not be processed by the API
      */
@@ -149,6 +152,7 @@ class Syspay_Merchant_Client
 
         if (($decoded instanceof stdClass) && isset($decoded->data) && ($decoded->data instanceof stdClass)) {
             $this->responseData = $decoded->data;
+
             return $request->buildResponse($decoded->data);
         } else {
             throw new Syspay_Merchant_UnexpectedResponseException('Unable to decode response from json', $body);

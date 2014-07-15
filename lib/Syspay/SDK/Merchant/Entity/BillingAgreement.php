@@ -66,6 +66,16 @@ class Syspay_Merchant_Entity_BillingAgreement extends Syspay_Merchant_Entity
     private $expirationDate;
 
     /**
+     * @var string
+     */
+    private $redirect;
+
+    /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * Gets the value of id.
      *
      * @return integer
@@ -289,6 +299,50 @@ class Syspay_Merchant_Entity_BillingAgreement extends Syspay_Merchant_Entity
     public function setExpirationDate(DateTime $expirationDate)
     {
         $this->expirationDate = $expirationDate;
+
+        return $this;
+    }
+
+    /**
+    * Gets the value of redirect.
+    * @return string
+    */
+    public function getRedirect()
+    {
+        return $this->redirect;
+    }
+
+    /**
+    * Sets the value of redirect.
+    * @param string $redirect the redirect
+    *
+    * @return self
+    */
+    public function setRedirect($redirect)
+    {
+        $this->redirect = $redirect;
+    }
+
+    /**
+     * Gets the value of description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the value of description.
+     *
+     * @param string $description the description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
         return $this;
     }

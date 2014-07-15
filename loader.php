@@ -36,6 +36,7 @@ $required = array(
     'Request/BillingAgreementCancellation',
     'Request/BillingAgreementInfo',
     'Request/BillingAgreementList',
+    'Request/BillingAgreement',
     'Request/ChargebackInfo',
     'Request/ChargebackList',
     'Request/Confirm',
