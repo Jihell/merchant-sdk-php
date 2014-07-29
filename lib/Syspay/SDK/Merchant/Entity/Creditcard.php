@@ -33,6 +33,56 @@ class Syspay_Merchant_Entity_Creditcard extends Syspay_Merchant_Entity
     protected $exp_year;
 
     /**
+     * @var string
+     */
+    protected $token;
+
+    /**
+     * {@inheritDoc}
+     *
+     * If a token is set, use it, otherwise use the full card data
+     */
+    public function toArray()
+    {
+        $data = array();
+        if (true === empty($this->token)) {
+            $data['number']     = $this->number;
+            $data['cardholder'] = $this->cardholder;
+            $data['cvc']        = $this->cvc;
+            $data['exp_month']  = $this->exp_month;
+            $data['exp_year']   = $this->exp_year;
+        } else {
+            $data['token']      = $this->token;
+        }
+
+        return $data;
+    }
+
+    /**
+     * Gets the value of token.
+     *
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Sets the value of token.
+     *
+     * @param string $token the token
+     *
+     * @return self
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
      * Gets the value of number.
      *
      * @return string
