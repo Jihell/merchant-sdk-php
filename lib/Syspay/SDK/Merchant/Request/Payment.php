@@ -2,8 +2,9 @@
 
 /**
  * Process a payment
- * @see  https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#hosted-payment-request
- * @see  https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#server-to-server-credit-card-payment
+ *
+ * @see https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#hosted-payment-request
+ * @see https://app.syspay.com/bundles/emiuser/doc/merchant_api.html#server-to-server-credit-card-payment
  */
 class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
 {
@@ -93,10 +94,20 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
     private $creditcard;
 
     /**
+     * @var array
+     */
+    private $notify;
+
+    /**
      * @var string
      */
     private $bankCode;
 
+    /**
+     * Construct
+     *
+     * @param string $flow
+     */
     public function __construct($flow)
     {
         if (!in_array($flow, array(self::FLOW_API, self::FLOW_BUYER, self::FLOW_SELLER))) {
@@ -168,11 +179,11 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
         }
 
         if (false === empty($this->website)) {
-            $data['website'] = $this->website;
+            $data['website'] = intval($this->website);
         }
 
         if (false === empty($this->agent)) {
-            $data['agent'] = $this->agent;
+            $data['agent'] = intval($this->agent);
         }
 
 
@@ -197,7 +208,11 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
         }
 
         if (false === empty($this->allowedRetries)) {
-            $data['allowed_retries'] = $this->allowedRetries;
+            $data['allowed_retries'] = intval($this->allowedRetries);
+        }
+
+        if (false === empty($this->notify)) {
+            $data['notify'] = $this->notify;
         }
 
         if (false === empty($this->bankCode)) {
@@ -250,25 +265,26 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
     public function setMode($mode)
     {
         $this->mode = $mode;
+
         return $this;
     }
 
     /**
-     * Sets the value of threatMetrixSessionId
+     * Sets the value of threatMatrixSessionId
      *
-     * @param string $threatMetrixSessionId
+     * @param string $threatMatrixSessionId
      *
      * @return self
      */
-    public function setThreatMetrixSessionId($threatMetrixSessionId)
+    public function setThreatMetrixSessionId($threatMatrixSessionId)
     {
-        $this->threatMetrixSessionId = $threatMetrixSessionId;
+        $this->threatMetrixSessionId = $threatMatrixSessionId;
 
         return $this;
     }
 
     /**
-     * Get the value of threatMetrixSessionId
+     * Get the value of threatMatrixSessionId
      *
      * @return string
      */
@@ -489,6 +505,7 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
     public function setAgent($agent)
     {
         $this->agent = $agent;
+
         return $this;
     }
 
@@ -515,6 +532,32 @@ class Syspay_Merchant_PaymentRequest extends Syspay_Merchant_Request
 
         return $this;
     }
+
+    /**
+     * Gets the values of notify.
+     *
+     * @return array
+     */
+    public function getNotify()
+    {
+        return $this->notify;
+    }
+
+
+    /**
+     * Sets the value of notify.
+     *
+     * @param array $notify
+     *
+     * @return self
+     */
+    public function setNotify(array $notify)
+    {
+        $this->notify = $notify;
+
+        return $this;
+    }
+
 
     /**
      * Gets the value of bankCode.

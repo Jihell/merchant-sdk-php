@@ -23,6 +23,11 @@ class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity
     protected $ip;
 
     /**
+     * @var string
+     */
+    protected $mobile;
+
+    /**
      * Gets the value of email.
      *
      * @return string
@@ -95,9 +100,34 @@ class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity
     }
 
     /**
+     * Gets the value of mobile.
+     *
+     * @return string
+     */
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
+    /**
+     * Sets the value of mobile.
+     *
+     * @param string $mobile the mobile
+     *
+     * @return self
+     */
+    public function setMobile($mobile)
+    {
+        $this->mobile = $mobile;
+
+        return $this;
+    }
+
+    /**
      * Build a customer entity based on a json-decoded customer stdClass
      *
-     * @param  stdClass $response The customer data
+     * @param stdClass $response The customer data
+     *
      * @return Syspay_Merchant_Entity_Customer The customer object
      */
     public static function buildFromResponse(stdClass $response)
@@ -106,6 +136,8 @@ class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity
         $customer->setEmail(isset($response->email)?$response->email:null);
         $customer->setLanguage(isset($response->language)?$response->language:null);
         $customer->setIp(isset($response->ip)?$response->ip:null);
+        $customer->setMobile(isset($response->mobile)?$response->mobile:null);
+
         return $customer;
     }
 }
