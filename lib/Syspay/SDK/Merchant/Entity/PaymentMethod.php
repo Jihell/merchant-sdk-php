@@ -3,7 +3,8 @@
 /**
  * A payment method object (this gives displayable information about a payment method used for a payment)
  */
-class Syspay_Merchant_Entity_PaymentMethod extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_PaymentMethod extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'payment_method';
 
@@ -34,6 +35,9 @@ class Syspay_Merchant_Entity_PaymentMethod extends Syspay_Merchant_Entity
         $paymentMethod = new self();
         $paymentMethod->setType(isset($response->type)?$response->type:null);
         $paymentMethod->setDisplay(isset($response->display)?$response->display:null);
+
+        $paymentMethod->raw = $response;
+
         return $paymentMethod;
     }
 

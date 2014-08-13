@@ -3,7 +3,8 @@
 /**
  * An Eterminal instance
  */
-class Syspay_Merchant_Entity_Eterminal extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Eterminal extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     /**
      * The full URL to the Eterminal instance
@@ -18,6 +19,9 @@ class Syspay_Merchant_Entity_Eterminal extends Syspay_Merchant_Entity
     {
         $eterminal = new self();
         $eterminal->setUrl(isset($response->url)?$response->url:null);
+
+        $eterminal->raw = $response;
+
         return $eterminal;
     }
 

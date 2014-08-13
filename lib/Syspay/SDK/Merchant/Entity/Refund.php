@@ -3,7 +3,8 @@
 /**
  * A refund object
  */
-class Syspay_Merchant_Entity_Refund extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Refund extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'refund';
 
@@ -77,6 +78,8 @@ class Syspay_Merchant_Entity_Refund extends Syspay_Merchant_Entity
         if (isset($response->payment)) {
             $refund->setPayment(Syspay_Merchant_Entity_Payment::buildFromResponse($response->payment));
         }
+
+        $refund->raw = $response;
 
         return $refund;
     }

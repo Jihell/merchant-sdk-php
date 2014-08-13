@@ -3,7 +3,8 @@
 /**
  * An AstroPay Bank
  */
-class Syspay_Merchant_Entity_AstroPayBank extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_AstroPayBank extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     /**
      * The bank code
@@ -32,6 +33,9 @@ class Syspay_Merchant_Entity_AstroPayBank extends Syspay_Merchant_Entity
         $bank->setCode(isset($response->code)?$response->code:null);
         $bank->setName(isset($response->name)?$response->name:null);
         $bank->setLogoUrl(isset($response->logo)?$response->logo:null);
+
+        $bank->raw = $response;
+
         return $bank;
     }
 

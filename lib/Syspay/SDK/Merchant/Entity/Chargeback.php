@@ -3,7 +3,8 @@
 /**
  * A chargeback object
  */
-class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'chargeback';
 
@@ -41,7 +42,7 @@ class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
      * @var DateTime
      */
     private $processingTime;
-    
+
     /**
      * @var DateTime
      */
@@ -66,7 +67,7 @@ class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
                 && !is_null($response->processing_time)) {
             $chargeback->setProcessingTime(Syspay_Merchant_Utils::tsToDateTime($response->processing_time));
         }
-        
+
         if (isset($response->bank_time)
                 && !is_null($response->bank_time)) {
             $chargeback->setBankTime(Syspay_Merchant_Utils::tsToDateTime($response->bank_time));
@@ -75,6 +76,8 @@ class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
         if (isset($response->payment)) {
             $chargeback->setPayment(Syspay_Merchant_Entity_Payment::buildFromResponse($response->payment));
         }
+
+        $chargeback->raw = $response;
 
         return $chargeback;
     }
@@ -246,7 +249,7 @@ class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
 
         return $this;
     }
-    
+
     /**
      * Gets the value of bankTime.
      *
@@ -256,7 +259,7 @@ class Syspay_Merchant_Entity_Chargeback extends Syspay_Merchant_Entity
     {
         return $this->bankTime;
     }
-    
+
     /**
      * Sets the value of bankTime.
      *

@@ -3,7 +3,8 @@
 /**
  * A subscription event object
  */
-class Syspay_Merchant_Entity_SubscriptionEvent extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_SubscriptionEvent extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'subscription_event';
 
@@ -36,6 +37,9 @@ class Syspay_Merchant_Entity_SubscriptionEvent extends Syspay_Merchant_Entity
             isset($response->scheduled_date)?Syspay_Merchant_Utils::tsToDateTime($response->scheduled_date):null
         );
         $event->setEventType(isset($response->event_type)?$response->event_type:null);
+
+        $event->raw = $response;
+
         return $event;
     }
 

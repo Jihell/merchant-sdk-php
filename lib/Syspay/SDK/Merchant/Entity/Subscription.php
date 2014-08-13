@@ -3,7 +3,8 @@
 /**
  * A subscription object
  */
-class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'subscription';
 
@@ -180,6 +181,8 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity
             $nextEvent = Syspay_Merchant_Entity_SubscriptionEvent::buildFromResponse($response->next_event);
             $subscription->setNextEvent($nextEvent);
         }
+
+        $subscription->raw = $response;
 
         return $subscription;
     }
@@ -652,6 +655,4 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity
 
         return $this;
     }
-
-
 }

@@ -5,6 +5,14 @@
  */
 abstract class Syspay_Merchant_Entity
 {
+
+    /**
+     * An stdClass object representing the raw object returned by the API
+     *
+     * @var stdClass
+     */
+    public $raw;
+
     /**
      * Get an array representation of the object to build the request.
      * It will collect all protected properties.

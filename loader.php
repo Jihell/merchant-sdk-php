@@ -14,6 +14,7 @@ $required = array(
     'Client',
     'EMS',
     'Entity',
+    'Entity/ReturnedEntityInterface',
     'Entity/AstroPayBank',
     'Entity/BillingAgreement',
     'Entity/Chargeback',

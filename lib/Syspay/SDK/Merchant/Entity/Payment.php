@@ -3,7 +3,8 @@
 /**
  * A payment object
  */
-class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'payment';
 
@@ -488,6 +489,8 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity
             $subscription = Syspay_Merchant_Entity_Subscription::buildFromResponse($response->subscription);
             $payment->setSubscription($subscription);
         }
+
+        $payment->raw = $response;
 
         return $payment;
     }

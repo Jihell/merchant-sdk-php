@@ -3,7 +3,8 @@
 /**
  * A plan object
  */
-class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'plan';
 
@@ -137,6 +138,8 @@ class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity
                 && !is_null($response->created)) {
             $plan->setCreated(Syspay_Merchant_Utils::tsToDateTime($response->created));
         }
+
+        $plan->raw = $response;
 
         return $plan;
     }

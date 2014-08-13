@@ -3,7 +3,8 @@
 /**
  * A customer object
  */
-class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'customer';
 
@@ -137,6 +138,8 @@ class Syspay_Merchant_Entity_Customer extends Syspay_Merchant_Entity
         $customer->setLanguage(isset($response->language)?$response->language:null);
         $customer->setIp(isset($response->ip)?$response->ip:null);
         $customer->setMobile(isset($response->mobile)?$response->mobile:null);
+
+        $customer->raw = $response;
 
         return $customer;
     }

@@ -3,7 +3,8 @@
 /**
  * A billing agreement object
  */
-class Syspay_Merchant_Entity_BillingAgreement extends Syspay_Merchant_Entity
+class Syspay_Merchant_Entity_BillingAgreement extends Syspay_Merchant_Entity implements
+    Syspay_Merchant_Entity_ReturnedEntityInterface
 {
     const TYPE = 'billing_agreement';
 
@@ -203,6 +204,8 @@ class Syspay_Merchant_Entity_BillingAgreement extends Syspay_Merchant_Entity
             $customer = Syspay_Merchant_Entity_Customer::buildFromResponse($response->customer);
             $billingAgreement->setCustomer($customer);
         }
+
+        $billingAgreement->raw = $response;
 
         return $billingAgreement;
     }
