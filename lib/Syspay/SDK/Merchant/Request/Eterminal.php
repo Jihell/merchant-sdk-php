@@ -491,7 +491,7 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
         }
 
         if (false === empty($this->reference)) {
-            $data['description'] = $this->reference;
+            $data['reference'] = $this->reference;
         }
 
         if (false === empty($this->customer)) {
