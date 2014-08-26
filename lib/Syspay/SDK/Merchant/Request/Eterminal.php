@@ -46,6 +46,16 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
     protected $type;
 
     /**
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * @var string
+     */
+    protected $reference;
+
+    /**
      * @var array
      */
     protected $customer;
@@ -280,6 +290,55 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
         return $this;
     }
 
+
+    /**
+     * Gets the value of description.
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the value of description.
+     *
+     * @param string $description the description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of reference.
+     *
+     * @return string
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * Sets the value of reference.
+     *
+     * @param string $reference the reference
+     *
+     * @return self
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
     /**
      * Gets the value of customer.
      *
@@ -427,6 +486,14 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
             $data['post_process_redirect_url'] = $this->postProcessRedirectUrl;
         }
 
+        if (false === empty($this->description)) {
+            $data['description'] = $this->description;
+        }
+
+        if (false === empty($this->reference)) {
+            $data['description'] = $this->reference;
+        }
+
         if (false === empty($this->customer)) {
             $data['customer'] = $this->customer;
         }
@@ -453,4 +520,5 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
 
         return $data;
     }
+
 }
