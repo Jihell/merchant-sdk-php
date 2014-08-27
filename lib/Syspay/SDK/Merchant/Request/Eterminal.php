@@ -478,8 +478,8 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
             $data['ems_url'] = $this->emsUrl;
         }
 
-        if (false == empty($this->redirectUrl)) {
-            $data['payment_page_redirect_url'] = $this->redirectUrl;
+        if (false == empty($this->paymentRedirectUrl)) {
+            $data['payment_page_redirect_url'] = $this->paymentRedirectUrl;
         }
 
         if (false == empty($this->eterminalRedirectUrl)) {
