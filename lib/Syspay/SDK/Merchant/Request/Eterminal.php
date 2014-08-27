@@ -38,7 +38,7 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
     /**
      * @var string
      */
-    protected $postProcessRedirectUrl;
+    protected $eterminalRedirectUrl;
 
     /**
      * @var string
@@ -247,9 +247,9 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
      *
      * @return string
      */
-    public function getPostProcessRedirectUrl()
+    public function getEterminalRedirectUrl()
     {
-        return $this->postProcessRedirectUrl;
+        return $this->eterminalRedirectUrl;
     }
 
     /**
@@ -259,9 +259,9 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
      *
      * @return self
      */
-    public function setPostProcessRedirectUrl($postProcessRedirectUrl)
+    public function setEterminalRedirectUrl($eterminalRedirectUrl)
     {
-        $this->postProcessRedirectUrl = $postProcessRedirectUrl;
+        $this->eterminalRedirectUrl = $eterminalRedirectUrl;
 
         return $this;
     }
@@ -482,8 +482,8 @@ class Syspay_Merchant_EterminalRequest extends Syspay_Merchant_Request
             $data['payment_page_redirect_url'] = $this->redirectUrl;
         }
 
-        if (false == empty($this->postProcessRedirectUrl)) {
-            $data['eterminal_redirect_url'] = $this->postProcessRedirectUrl;
+        if (false == empty($this->eterminalRedirectUrl)) {
+            $data['eterminal_redirect_url'] = $this->eterminalRedirectUrl;
         }
 
         if (false === empty($this->description)) {
