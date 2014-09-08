@@ -201,6 +201,11 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
     private $settlementDate;
 
     /**
+     * @var Syspay_Merchant_Entity_PaymentMethod
+     */
+    private $payment_method;
+
+    /**
      * Gets the value of reference.
      *
      * @return string
@@ -488,6 +493,12 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
                 && ($response->subscription instanceof stdClass)) {
             $subscription = Syspay_Merchant_Entity_Subscription::buildFromResponse($response->subscription);
             $payment->setSubscription($subscription);
+        }
+
+        if (isset($response->payment_method)
+                && ($response->payment_method instanceof stdClass)) {
+            $paymentMethod = Syspay_Merchant_Entity_PaymentMethod::buildFromResponse($response->payment_method);
+            $payment->setPaymentMethod($paymentMethod);
         }
 
         $payment->raw = $response;
@@ -863,6 +874,30 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
     public function setMerchantId($merchantId)
     {
         $this->merchantId = $merchantId;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of payment_method.
+     *
+     * @return Syspay_Merchant_Entity_PaymentMethod
+     */
+    public function getPaymentMethod()
+    {
+        return $this->payment_method;
+    }
+
+    /**
+     * Sets the value of payment_method.
+     *
+     * @param Syspay_Merchant_Entity_PaymentMethod $payment_method the payment_method
+     *
+     * @return self
+     */
+    public function setPaymentMethod(Syspay_Merchant_Entity_PaymentMethod $payment_method)
+    {
+        $this->payment_method = $payment_method;
 
         return $this;
     }
