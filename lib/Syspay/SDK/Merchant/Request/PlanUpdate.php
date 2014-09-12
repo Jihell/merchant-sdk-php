@@ -159,19 +159,17 @@ class Syspay_Merchant_PlanUpdateRequest extends Syspay_Merchant_Request
     public function getData()
     {
         $data = array();
-        if (false === empty($this->plan_id)) {
-            $data['plan_id'] = $this->plan_id;
-        }
+        $data['plan_id'] = $this->plan_id;
 
-        if (false === empty($this->trial_amount)) {
+        if (isset($data['trial_amount'])) {
             $data['trial_amount'] = $this->trial_amount;
         }
 
-        if (false === empty($this->initial_amount)) {
+        if (isset($data['initial_amount'])) {
             $data['initial_amount'] = $this->initial_amount;
         }
 
-        if (false === empty($this->billing_amount)) {
+        if (isset($data['billing_amount'])) {
             $data['billing_amount'] = $this->billing_amount;
         }
         return $data;
