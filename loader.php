@@ -49,6 +49,7 @@ $required = array(
     'Request/PaymentList',
     'Request/Plan',
     'Request/PlanInfo',
+    'Request/PlanUpdate',
     'Request/Rebill',
     'Request/Refund',
     'Request/RefundInfo',
