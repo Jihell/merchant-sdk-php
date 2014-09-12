@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Create a plan
- * @see https://app.syspay.com/docs/api/merchant_subscription.html#create-a-plan
+ * Uodate a plan
+ * @see https://app.syspay.com/docs/api/merchant_subscription.html#update-a-plan
  */
 class Syspay_Merchant_PlanUpdateRequest extends Syspay_Merchant_Request
 {
