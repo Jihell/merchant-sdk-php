@@ -470,7 +470,7 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
         $payment->setDescriptor(isset($response->descriptor)?$response->descriptor:null);
         $payment->setAccountId(isset($response->account_id)?$response->account_id:null);
         $payment->setMerchantLogin(isset($response->merchant_login)?$response->merchant_login:null);
-        $payment->setMerchantId(isset($reponse->merchant_id)?$response->merchant_id:null);
+        $payment->setMerchantId(isset($response->merchant_id)?$response->merchant_id:null);
 
         if (isset($response->settlement_date)
                 && !is_null($response->settlement_date)) {
