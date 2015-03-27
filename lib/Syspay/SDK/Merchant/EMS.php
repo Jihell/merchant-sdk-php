@@ -2,7 +2,8 @@
 
 /**
  * Handle EMS (Event Messaging System) callbacks
- * @see  https://app.syspay.com/bundles/emiuser/doc/merchant_ems.html
+ *
+ * @see https://app.syspay.com/bundles/emiuser/doc/merchant_ems.html
  */
 class Syspay_Merchant_EMS
 {
@@ -13,7 +14,7 @@ class Syspay_Merchant_EMS
 
     /**
      * Build an EMS handler
-     * @param array   $secrets  An array where each key is your merchant login and the value is the related passphrase
+     * @param array   $secrets       An array where each key is your merchant login and the value is the related passphrase
      * @param boolean $skipAuthCheck Skip the checksum validation
      */
     public function __construct(array $secrets, $skipAuthCheck = false)
@@ -25,6 +26,8 @@ class Syspay_Merchant_EMS
                                             $_SERVER['CONTENT_TYPE']:'application/x-www-form-urlencoded';
         $this->headers['x-merchant']   = isset($_SERVER['HTTP_X_MERCHANT'])?$_SERVER['HTTP_X_MERCHANT']:null;
         $this->headers['x-checksum']   = isset($_SERVER['HTTP_X_CHECKSUM'])?$_SERVER['HTTP_X_CHECKSUM']:null;
+        $this->headers['x-event-id']   = isset($_SERVER['HTTP_X_EVENT_ID'])?$_SERVER['HTTP_X_EVENT_ID']:null;
+        $this->headers['x-event-date'] = isset($_SERVER['HTTP_X_EVENT_DATE'])?$_SERVER['HTTP_X_EVENT_DATE']:null;
 
         $this->content = file_get_contents('php://input');
     }
@@ -64,6 +67,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return Syspay_Merchant_Entity_Payment::buildFromResponse($content->data->payment);
                 break;
             case 'refund':
@@ -73,6 +77,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return Syspay_Merchant_Entity_Refund::buildFromResponse($content->data->refund);
                 break;
             case 'chargeback':
@@ -82,6 +87,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return Syspay_Merchant_Entity_Chargeback::buildFromResponse($content->data->chargeback);
                 break;
             case 'billing_agreement':
@@ -91,6 +97,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return Syspay_Merchant_Entity_BillingAgreement::buildFromResponse($content->data->billing_agreement);
                 break;
             case 'subscription':
@@ -100,6 +107,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return Syspay_Merchant_Entity_Subscription::buildFromResponse($content->data->subscription);
             default:
                 throw new Syspay_Merchant_EMSException(
@@ -164,6 +172,7 @@ class Syspay_Merchant_EMS
                         Syspay_Merchant_EMSException::CODE_INVALID_CONTENT
                     );
                 }
+
                 return $content;
             case 'application/x-www-form-urlencoded':
             default:
@@ -172,8 +181,34 @@ class Syspay_Merchant_EMS
     }
 
     /**
+     * Return the event unique ID
+     * @return string
+     */
+    public function getEventId()
+    {
+        return $this->headers['x-event-id'];
+    }
+
+    /**
+     * Return the event creation date
+     * @return DateTime
+     */
+    public function getEventDate()
+    {
+        if (isset($this->headers['x-event-date'])) {
+            $date = new DateTime();
+            $date->setTimestamp($this->headers['x-event-date']);
+            return $date;
+        }
+
+        return null;
+    }
+
+
+    /**
      * Convert an array or a scalar to a stdClass object
-     * @param  mixed    $a The input value
+     * @param mixed $a The input value
+     *
      * @return stdClass Its object representation
      */
     private static function toObject($a)
@@ -181,6 +216,7 @@ class Syspay_Merchant_EMS
         if (is_array($a)) {
             return (object) array_map(array('Syspay_Merchant_EMS', 'toObject'), $a);
         }
+
         return $a;
     }
 }
