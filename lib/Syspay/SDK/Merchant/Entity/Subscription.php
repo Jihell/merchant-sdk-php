@@ -76,7 +76,7 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
     /**
      * @var integer
      */
-    private $website;
+    protected $website_id;
 
     /**
      * @var string
@@ -145,6 +145,7 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
         $subscription->setPhase(isset($response->phase)?$response->phase:null);
         $subscription->setExtra(isset($response->extra)?$response->extra:null);
         $subscription->setEmsUrl(isset($response->ems_url)?$response->ems_url:null);
+        $subscription->setWebsiteId(isset($response->website_id)?$response->website_id:null);
         $subscription->setCreated(
             isset($response->created)?Syspay_Merchant_Utils::tsToDateTime($response->created):null
         );
@@ -380,25 +381,51 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
     }
 
     /**
-     * Gets the value of website.
+     * Gets the value of website_id.
+     * Kept for BC.
      *
      * @return integer
      */
     public function getWebsite()
     {
-        return $this->website;
+        return $this->website_id;
     }
 
     /**
-     * Sets the value of website.
+     * Sets the value of website_id
+     * Kept for BC.
      *
-     * @param integer $website the website
+     * @param integer $website the website id
      *
      * @return self
      */
     public function setWebsite($website)
     {
-        $this->website = $website;
+        $this->website_id = $website;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of website_id.
+     *
+     * @return integer
+     */
+    public function getWebsiteId()
+    {
+        return $this->website_id;
+    }
+
+    /**
+     * Sets the value of website_id
+     *
+     * @param integer $websiteId the website id
+     *
+     * @return self
+     */
+    public function setWebsiteId($websiteId)
+    {
+        $this->website_id = $websiteId;
 
         return $this;
     }
