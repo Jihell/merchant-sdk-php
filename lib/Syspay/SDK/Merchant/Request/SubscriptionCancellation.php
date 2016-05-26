@@ -14,6 +14,11 @@ class Syspay_Merchant_SubscriptionCancellationRequest extends Syspay_Merchant_Re
      */
     private $subscriptionId;
 
+    /**
+     * @var boolean
+     */
+    private $now = false;
+
     public function __construct($subscriptionId = null)
     {
         if (null !== $subscriptionId) {
@@ -76,5 +81,40 @@ class Syspay_Merchant_SubscriptionCancellationRequest extends Syspay_Merchant_Re
         $this->subscriptionId = $subscriptionId;
 
         return $this;
+    }
+
+    /**
+     * Sets the value of now.
+     *
+     * @param boolean $now Terminate the subscription right away
+     *
+     * @return self
+     */
+    public function setNow($now)
+    {
+        $this->now = $now;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of now.
+     *
+     * @return boolean
+     */
+    public function getNow()
+    {
+        return $this->now;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getData()
+    {
+        $data = array();
+        $data['now'] = $this->now;
+
+        return $data;
     }
 }

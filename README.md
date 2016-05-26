@@ -480,9 +480,22 @@ $payment = $client->request($cancelRequest);
 
 Request class: [Syspay\_Merchant\_SubscriptionCancellationRequest](https://app.syspay.com/docs/merchant-sdk-php/class-Syspay_Merchant_SubscriptionCancellationRequest.html)
 
+By default, cancelling a subscription will let it run until the end of the current period and keep re-attempting the last payment if it was not successful:
+
 ```php
 <?php
 $cancelRequest = new Syspay_Merchant_SubscriptionCancellationRequest($subscriptionId);
+$subscription = $client->request($cancelRequest);
+// $subscription is an instance of Syspay_Merchant_Entity_Subscription
+```
+
+If you want to terminate the subscription right away and cancel any further re-attempt for failed payments, you can set the `now` property to true:
+
+```php
+
+<?php
+$cancelRequest = new Syspay_Merchant_SubscriptionCancellationRequest($subscriptionId);
+$cancelRequest->setNow(true);
 $subscription = $client->request($cancelRequest);
 // $subscription is an instance of Syspay_Merchant_Entity_Subscription
 ```
