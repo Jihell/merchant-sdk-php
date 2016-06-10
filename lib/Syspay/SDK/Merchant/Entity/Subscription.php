@@ -8,10 +8,11 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
 {
     const TYPE = 'subscription';
 
-    const STATUS_PENDING   = 'PENDING'; // First payment not yet successful
-    const STATUS_ACTIVE    = 'ACTIVE'; // Active susbscription
-    const STATUS_CANCELLED = 'CANCELLED'; // The first payment failed, the subscription is cancelled
-    const STATUS_ENDED     = 'ENDED'; // Subscription has ended
+    const STATUS_PENDING    = 'PENDING'; // First payment not yet successful
+    const STATUS_ACTIVE     = 'ACTIVE'; // Active susbscription
+    const STATUS_CANCELLED  = 'CANCELLED'; // The first payment failed, the subscription is cancelled
+    const STATUS_ENDED      = 'ENDED'; // Subscription has ended but rebills are still possible
+    const STATUS_TERMINATED = 'TERMINATED'; // Subscription is completely terminated, manual rebills are not possible anymore
 
     const PHASE_NEW       = 'NEW';
     const PHASE_TRIAL     = 'TRIAL';
