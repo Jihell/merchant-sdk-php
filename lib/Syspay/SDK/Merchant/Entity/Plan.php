@@ -109,6 +109,11 @@ class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity implements
     protected $total_amount;
 
     /**
+     * @var integer
+     */
+    protected $default_capture_delay = 0;
+
+    /**
      * Build a plan entity based on a json-decoded plan stdClass
      *
      * @param  stdClass $response The plan data
@@ -133,6 +138,7 @@ class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity implements
         $plan->setInitialAmount(isset($response->initial_amount)?$response->initial_amount:null);
         $plan->setRetryMapId(isset($response->retry_map_id)?$response->retry_map_id:null);
         $plan->setType(isset($response->type)?$response->type:null);
+        $plan->setDefaultCaptureDelay(isset($response->default_capture_delay)?$response->default_capture_delay:null);
 
         if (isset($response->created)
                 && !is_null($response->created)) {
@@ -575,4 +581,30 @@ class Syspay_Merchant_Entity_Plan extends Syspay_Merchant_Entity implements
 
         return $this;
     }
+
+    /**
+     * Gets the value of $default_capture_delay.
+     *
+     * @return int
+     */
+    public function getDefaultCaptureDelay()
+    {
+        return $this->default_capture_delay;
+    }
+
+    /**
+     * Sets the value of $default_capture_delay.
+     *
+     * @param int $default_capture_delay
+     *
+     * @return self
+     */
+    public function setDefaultCaptureDelay($default_capture_delay)
+    {
+        $this->default_capture_delay = $default_capture_delay;
+
+        return $this;
+    }
+
+
 }

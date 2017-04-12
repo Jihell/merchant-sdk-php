@@ -30,6 +30,11 @@ class Syspay_Merchant_PlanUpdateRequest extends Syspay_Merchant_Request
     protected $billing_amount;
 
     /**
+     * @var integer
+     */
+    protected $default_capture_delay;
+
+    /**
      * PlanUpdate Constuctor
      *
      * @param int $plan_id
@@ -154,6 +159,31 @@ class Syspay_Merchant_PlanUpdateRequest extends Syspay_Merchant_Request
     }
 
     /**
+     * Gets the value of $default_capture_delay.
+     *
+     * @return int
+     */
+    public function getDefaultCaptureDelay()
+    {
+        return $this->default_capture_delay;
+    }
+
+    /**
+     * Sets the value of $default_capture_delay.
+     *
+     * @param int $default_capture_delay
+     *
+     * @return self
+     */
+    public function setDefaultCaptureDelay($default_capture_delay)
+    {
+        $this->default_capture_delay = $default_capture_delay;
+
+        return $this;
+    }
+
+
+    /**
      * {@inheritDoc}
      */
     public function getData()
@@ -171,6 +201,10 @@ class Syspay_Merchant_PlanUpdateRequest extends Syspay_Merchant_Request
 
         if ($this->billing_amount !== null) {
             $data['billing_amount'] = $this->billing_amount;
+        }
+
+        if ($this->default_capture_delay !== null) {
+            $data['default_capture_delay'] = $this->default_capture_delay;
         }
 
         return $data;

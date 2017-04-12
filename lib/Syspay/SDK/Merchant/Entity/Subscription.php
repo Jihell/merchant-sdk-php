@@ -130,6 +130,11 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
     private $next_event;
 
     /**
+     * @var integer
+     */
+    private $capture_delay;
+
+    /**
      * Build a subscription entity based on a json-decoded subscription stdClass
      *
      * @param  stdClass $response The subscription data
@@ -147,6 +152,7 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
         $subscription->setExtra(isset($response->extra)?$response->extra:null);
         $subscription->setEmsUrl(isset($response->ems_url)?$response->ems_url:null);
         $subscription->setWebsiteId(isset($response->website_id)?$response->website_id:null);
+        $subscription->setCaptureDelay(isset($response->capture_delay)?$response->capture_delay:null);
         $subscription->setCreated(
             isset($response->created)?Syspay_Merchant_Utils::tsToDateTime($response->created):null
         );
@@ -683,4 +689,30 @@ class Syspay_Merchant_Entity_Subscription extends Syspay_Merchant_Entity impleme
 
         return $this;
     }
+
+    /**
+     * Gets the capture delay
+     *
+     * @return int
+     */
+    public function getCaptureDelay()
+    {
+        return $this->capture_delay;
+    }
+
+    /**
+     * Sets the capture delay
+     *
+     * @param int $capture_delay
+     *
+     * @return self
+     */
+    public function setCaptureDelay($capture_delay)
+    {
+        $this->capture_delay = $capture_delay;
+
+        return $this;
+    }
+
+
 }
