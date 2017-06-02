@@ -206,6 +206,21 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
     private $payment_method;
 
     /**
+     * @var integer
+     */
+    private $subscription_counter;
+
+    /**
+     * @var integer
+     */
+    private $subscription_counter_type;
+
+    /**
+     * @var integer
+     */
+    private $subscription_attempt;
+
+    /**
      * Gets the value of reference.
      *
      * @return string
@@ -471,6 +486,9 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
         $payment->setAccountId(isset($response->account_id)?$response->account_id:null);
         $payment->setMerchantLogin(isset($response->merchant_login)?$response->merchant_login:null);
         $payment->setMerchantId(isset($response->merchant_id)?$response->merchant_id:null);
+        $payment->setSubscriptionCounter(isset($response->subscription_counter)?$response->subscription_counter:null);
+        $payment->setSubscriptionCounterType(isset($response->subscription_counter_type)?$response->subscription_counter_type:null);
+        $payment->setSubscriptionAttempt(isset($response->subscription_attempt)?$response->subscription_attempt:null);
 
         if (isset($response->settlement_date)
                 && !is_null($response->settlement_date)) {
@@ -898,6 +916,75 @@ class Syspay_Merchant_Entity_Payment extends Syspay_Merchant_Entity implements
     public function setPaymentMethod(Syspay_Merchant_Entity_PaymentMethod $payment_method)
     {
         $this->payment_method = $payment_method;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of subscription_counter
+     *
+     * @return int
+     */
+    public function getSubscriptionCounter()
+    {
+        return $this->subscription_counter;
+    }
+
+    /**
+     * Set the value of subscription_counter
+     *
+     * @param int $subscription_counter
+     * @return $this
+     */
+    public function setSubscriptionCounter($subscription_counter)
+    {
+        $this->subscription_counter = $subscription_counter;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of subscription_counter_type
+     *
+     * @return int
+     */
+    public function getSubscriptionCounterType()
+    {
+        return $this->subscription_counter_type;
+    }
+
+    /**
+     * Set the value of subscription_counter_type
+     *
+     * @param int $subscription_counter_type
+     * @return $this
+     */
+    public function setSubscriptionCounterType($subscription_counter_type)
+    {
+        $this->subscription_counter_type = $subscription_counter_type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of subscription_attempt
+     *
+     * @return int
+     */
+    public function getSubscriptionAttempt()
+    {
+        return $this->subscription_attempt;
+    }
+
+    /**
+     * Set the value of subscription_attempt
+     *
+     * @param int $subscription_attempt
+     * @return $this
+     */
+    public function setSubscriptionAttempt($subscription_attempt)
+    {
+        $this->subscription_attempt = $subscription_attempt;
 
         return $this;
     }
